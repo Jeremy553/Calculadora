@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>JGraph Lab</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <!-- Motor matemático -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.2/math.min.js"
+    ></script>
+
+    <!-- Gráficas -->
+    <script
+        src="https://cdn.plot.ly/plotly-2.35.2.min.js"
+    ></script>
+</head>
+
+
+<body>
+
+    <div class="app">
+
+        <!-- =========================
+             BARRA LATERAL
+        ========================== -->
+
+        <aside class="sidebar">
+
+          <div class="marca">
+
+    <div class="marca-texto">
+
+        <h1>
+            JGraph
+        </h1>
+
+        <span>
+            Math Lab
+        </span>
+
+    </div>
+
+</div>
+
+            <nav
+                class="menu"
+                aria-label="Navegación principal"
+            >
+
+                <a
+                    href="#graficador"
+                    class="menu-item activo"
+                >
+                    <span class="icono">
+                        ⌁
+                    </span>
+
+                    <span>
+                        Graficador
+                    </span>
+                </a>
+
+
+                <a
+                    href="#calculadora"
+                    class="menu-item"
+                >
+                    <span class="icono">
+                        ▦
+                    </span>
+
+                    <span>
+                        Calculadora
+                    </span>
+                </a>
+
+
+                <a
+                    href="#analisis"
+                    class="menu-item"
+                >
+                    <span class="icono">
+                        ◇
+                    </span>
+
+                    <span>
+                        Análisis
+                    </span>
+                </a>
+
+
+                <a
+                    href="#historialSeccion"
+                    class="menu-item"
+                >
+                    <span class="icono">
+                        ◷
+                    </span>
+
+                    <span>
+                        Historial
+                    </span>
+                </a>
+
+            </nav>
+
+
+            <div class="estado">
+
+                <span
+                    class="estado-punto"
+                    aria-hidden="true"
+                ></span>
+
+                <div>
+
+                    <small>
+                        ESTADO
+                    </small>
+
+                    <p id="estadoMotor">
+                        Motor matemático activo
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             CONTENIDO
+        ========================== -->
+
+        <main class="contenido">
+
+            <header class="cabecera">
+
+                <div>
+
+                    <h2>
+                        Calculadora Gráfica
+                    </h2>
+
+                </div>
+
+
+                <span class="version">
+                    v1.1
+                </span>
+
+            </header>
+
+
+
+            <!-- =========================
+                 GRAFICADOR
+            ========================== -->
+
+            <section
+                class="panel-principal"
+                id="graficador"
+            >
+
+                <div class="encabezado-panel">
+
+                    <div>
+
+                        <span class="numero-seccion">
+                            01
+                        </span>
+
+                        <h3>
+                            Función / Ecuación
+                        </h3>
+
+                    </div>
+
+
+                    <span
+                        class="estado-panel"
+                        id="estadoPanel"
+                    >
+                        Listo
+                    </span>
+
+                </div>
+
+
+
+                <!-- ENTRADA -->
+
+                <div
+                    class="entrada-funcion"
+                    id="entradaFuncion"
+                >
+
+                    <span
+                        class="fx"
+                        id="iconoFuncion"
+                    >
+                        f(x)
+                    </span>
+
+
+                    <div class="campo-funcion">
+
+                        <input
+                            type="text"
+                            id="funcion"
+                            placeholder="Prueba con x^2 - 5*x + 6 = 0"
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+
+
+                        <span
+                            class="tipo-detectado-input"
+                            id="tipoDetectadoInput"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+                <p
+                    class="mensaje-funcion"
+                    id="mensajeFuncion"
+                >
+                    Escribe una función o ecuación para comenzar.
+                </p>
+
+
+
+                <!-- PRUEBAS RÁPIDAS -->
+
+                <div class="ejemplos">
+
+                    <div class="ejemplos-titulo">
+
+                        <span>
+                            Pruebas rápidas
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="ejemplo"
+                        type="button"
+                        data-ejemplo="2*x + 3 = 7"
+                    >
+                        <span>／</span>
+
+                        Lineal
+                    </button>
+
+
+                    <button
+                        class="ejemplo"
+                        type="button"
+                        data-ejemplo="x^2 - 4 = 0"
+                    >
+                        <span>∪</span>
+
+                        Cuadrática
+                    </button>
+
+
+                    <button
+                        class="ejemplo"
+                        type="button"
+                        data-ejemplo="x^3 - 4*x = 0"
+                    >
+                        <span>∿</span>
+
+                        Polinomial
+                    </button>
+
+
+                    <button
+                        class="ejemplo"
+                        type="button"
+                        data-ejemplo="sin(x) = 0"
+                    >
+                        <span>≈</span>
+
+                        Trigonométrica
+                    </button>
+
+                </div>
+
+
+
+                <!-- ACCIONES -->
+
+                <div class="acciones-grafica">
+
+                    <button
+                        id="graficar"
+                        type="button"
+                    >
+                        Graficar
+                    </button>
+
+
+                    <button
+                        id="resolver"
+                        type="button"
+                    >
+                        Resolver ecuación
+                    </button>
+
+
+                    <button
+                        id="limpiarGrafica"
+                        type="button"
+                    >
+                        Limpiar
+                    </button>
+
+                </div>
+
+
+
+                <!-- RESULTADOS -->
+
+                <div
+                    class="datos-rapidos"
+                    id="analisis"
+                >
+
+                    <div class="dato dato-tipo">
+
+                        <div
+                            class="dato-icono"
+                            id="iconoTipo"
+                        >
+                            ∿
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Tipo
+                            </span>
+
+                            <strong id="tipoFuncion">
+                                Sin analizar
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dato dato-solucion">
+
+                        <span>
+                            Solución
+                        </span>
+
+                        <strong id="solucion">
+                            Sin resolver
+                        </strong>
+
+                    </div>
+
+
+                    <div class="dato dato-motor">
+
+                        <span>
+                            Motor
+                        </span>
+
+                        <strong id="motorInfo">
+                            Numérico
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- GRÁFICA -->
+
+                <div
+                    class="zona-grafica
+                           zona-grafica-principal"
+                >
+
+                    <div class="barra-grafica">
+
+                        <div
+                            class="controles-ventana"
+                            aria-hidden="true"
+                        >
+
+                            <span
+                                class="punto rojo"
+                            ></span>
+
+                            <span
+                                class="punto amarillo"
+                            ></span>
+
+                            <span
+                                class="punto verde"
+                            ></span>
+
+                        </div>
+
+
+                        <div class="titulo-visualizacion">
+
+                            <span>
+                                Gráfica
+                            </span>
+
+                            <small id="estadoGrafica">
+                                esperando función
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div id="grafica">
+
+                        <div
+                            class="grafica-vacia"
+                            id="graficaVacia"
+                        >
+
+                            <div
+                                class="icono-vacio"
+                                aria-hidden="true"
+                            >
+
+                                <svg
+                                    viewBox="0 0 100 70"
+                                >
+
+                                    <path
+                                        d="
+                                        M7 53
+                                        C20 53 23 15 39 15
+                                        C55 15 57 55 73 55
+                                        C83 55 88 40 94 29
+                                        "
+                                    ></path>
+
+                                    <circle
+                                        cx="39"
+                                        cy="15"
+                                        r="3"
+                                    ></circle>
+
+                                </svg>
+
+                            </div>
+
+
+                            <p>
+                                Tu gráfica aparecerá aquí
+                            </p>
+
+                            <small>
+                                Prueba una función rápida o escribe la tuya
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 CALCULADORA
+            ========================== -->
+
+            <section
+                class="panel-secundario
+                       calculadora-lab"
+                id="calculadora"
+            >
+
+                <div class="calculadora-intro">
+
+                    <div>
+
+                        <span class="numero-seccion">
+                            02
+                        </span>
+
+                    </div>
+
+
+                    <div class="calculadora-copy">
+
+                        <h3>
+                            Calculadora científica
+                        </h3>
+
+                        <p>
+                            Operaciones rápidas sin salir del laboratorio.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="calculadora-cuerpo">
+
+                    <div class="pantalla-contenedor">
+
+                        <span class="pantalla-prefix">
+                            =
+                        </span>
+
+
+                        <input
+                            type="text"
+                            id="pantalla"
+                            placeholder="0"
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+
+                    </div>
+
+
+
+                    <div class="botones">
+
+                        <button
+                            class="especial"
+                            type="button"
+                            data-accion="limpiar"
+                        >
+                            C
+                        </button>
+
+
+                        <button
+                            class="especial"
+                            type="button"
+                            data-accion="borrar"
+                        >
+                            ⌫
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="("
+                        >
+                            (
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor=")"
+                        >
+                            )
+                        </button>
+
+
+
+                        <button
+                            type="button"
+                            data-valor="7"
+                        >
+                            7
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="8"
+                        >
+                            8
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="9"
+                        >
+                            9
+                        </button>
+
+
+                        <button
+                            class="operador"
+                            type="button"
+                            data-valor="/"
+                        >
+                            ÷
+                        </button>
+
+
+
+                        <button
+                            type="button"
+                            data-valor="4"
+                        >
+                            4
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="5"
+                        >
+                            5
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="6"
+                        >
+                            6
+                        </button>
+
+
+                        <button
+                            class="operador"
+                            type="button"
+                            data-valor="*"
+                        >
+                            ×
+                        </button>
+
+
+
+                        <button
+                            type="button"
+                            data-valor="1"
+                        >
+                            1
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="2"
+                        >
+                            2
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="3"
+                        >
+                            3
+                        </button>
+
+
+                        <button
+                            class="operador"
+                            type="button"
+                            data-valor="-"
+                        >
+                            −
+                        </button>
+
+
+
+                        <button
+                            type="button"
+                            data-valor="0"
+                        >
+                            0
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="."
+                        >
+                            .
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="^"
+                        >
+                            xʸ
+                        </button>
+
+
+                        <button
+                            class="operador"
+                            type="button"
+                            data-valor="+"
+                        >
+                            +
+                        </button>
+
+
+
+                        <button
+                            type="button"
+                            data-valor="sqrt("
+                        >
+                            √
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="sin("
+                        >
+                            sin
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="cos("
+                        >
+                            cos
+                        </button>
+
+
+                        <button
+                            type="button"
+                            data-valor="tan("
+                        >
+                            tan
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        id="igual"
+                        type="button"
+                    >
+                        =
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 HISTORIAL
+            ========================== -->
+
+            <section
+                class="panel-secundario
+                       historial-contenedor"
+                id="historialSeccion"
+            >
+
+                <div class="encabezado-panel">
+
+                    <div>
+
+                        <span class="numero-seccion">
+                            03
+                        </span>
+
+                        <h3>
+                            Historial
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <ul id="historial">
+
+                    <li class="historial-vacio">
+                        Aquí aparecerán tus últimas operaciones.
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+
+           
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
