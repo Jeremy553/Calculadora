@@ -2795,3 +2795,105 @@ footer {
     }
 
 }
+#funcion::placeholder { color: #8995ab; }
+.tipo-detectado-input { color: #5266a3; }
+.mensaje-funcion, .ejemplos-titulo span { color: #65718a; }
+.ejemplo {
+  color: #304568;
+  background: #f2f5fb;
+  border: 1px solid #d6dfef;
+  border-radius: 6px;
+  font-size: 11px;
+}
+.ejemplo:hover { color: #3154cc; background: #e9efff; }
+
+/* Botones con colores propios y alto contraste. */
+.acciones-grafica { gap: 10px; }
+.acciones-grafica button, #igual, .botones button { border-radius: 7px; }
+#graficar, #igual {
+  color: #fff;
+  background: #3154cc;
+  box-shadow: none;
+}
+#graficar:hover, #igual:hover { color: #fff; background: #223e9f; }
+#graficar.cta-pendiente { animation: none; }
+#resolver { color: #fff; background: #1d2d4d; border: 1px solid #1d2d4d; }
+#resolver:hover { background: #2b446d; }
+#limpiarGrafica { color: #41516d; background: #edf1f8; border: 1px solid #d8deea; }
+#limpiarGrafica:hover { color: #243858; background: #e4eaf5; }
+
+/* Resultados más legibles. */
+.datos-rapidos { background: #f2f5fc; border: 1px solid #d9e2f2; border-radius: 7px; }
+.dato { background: transparent; }
+.dato + .dato { border-color: #d7dfef; }
+.dato span { color: #6d7890; font-size: 10px; }
+.dato strong { color: #1d3157; font-size: 13px; }
+.dato-solucion { background: #eaf0ff; }
+.dato-solucion strong { color: #3154cc; }
+.dato-icono { color: #3154cc; background: #e1e9fa; }
+
+/* La gráfica se vuelve una pizarra matemática. */
+.zona-grafica-principal {
+  margin-top: 22px;
+  background: #09090b;
+  border: 3px solid #233965;
+  border-radius: 8px;
+}
+.barra-grafica {
+  min-height: 46px;
+  padding: 10px 16px;
+  background: #233965;
+  border-bottom: 1px solid #38517c;
+}
+.controles-ventana { display: none; }
+.titulo-visualizacion { font-size: 12px; }
+.titulo-visualizacion::before { content: "ƒ(x)"; color: #ffbf62; font: italic 18px Georgia,serif; }
+.titulo-visualizacion span { color: #fff; font-weight: 700; font-size: 13px; }
+.titulo-visualizacion small { color: #c7d5ed; font-size: 10px; }
+#grafica { background: #09090b; }
+#grafica .scatterlayer .js-line { stroke: #ffbf62 !important; }
+.grafica-vacia p { color: #e1e8f3; font-size: 16px; }
+.grafica-vacia small { color: #a4b2c7; font-size: 11px; }
+.icono-vacio path { stroke: #ffbf62; }
+.icono-vacio circle { fill: #ffbf62; }
+
+/* Calculadora y resultados secundarios. */
+.calculadora-lab { width: 100%; margin-left: 0; }
+.calculadora-copy p { color: #69758e; font-size: 13px; }
+.pantalla-contenedor { border-radius: 7px; background: #172a4a; }
+.pantalla-prefix { color: #ffbf62; }
+.botones button {
+  color: #1f3359;
+  background: #e8eef8;
+  border: 1px solid #d4dfef;
+}
+.botones button:hover { color: #1f3359; background: #dbe5f7; }
+.botones .operador { color: #3154cc; background: #dce7ff; }
+.botones .especial { color: #a43d3d; background: #fff0ee; }
+#igual { border-radius: 7px; }
+.historial-contenedor { width: 100%; margin-left: 0; }
+#historial li { color: #32415d; border-color: #e0e6f1; font-size: 12px; }
+#historial .historial-vacio { color: #78869c; }
+footer { color: #738098; border-color: #d9e1ec; }
+
+/* Adaptación a tablets y teléfonos. */
+@media (max-width: 860px) {
+  .sidebar { position: static; flex-direction: column; align-items: stretch; gap: 13px; padding: 15px 20px; }
+  .menu { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; gap: 5px; }
+  .menu-item { flex: 0 0 auto; white-space: nowrap; }
+  .contenido { padding: 26px 16px 45px; }
+  .panel-principal, .panel-secundario { padding: 20px; }
+  .calculadora-lab { grid-template-columns: 1fr; gap: 20px; }
+  .datos-rapidos { grid-template-columns: 1fr 1.35fr; }
+}
+@media (max-width: 580px) {
+  .cabecera { margin-bottom: 18px; }
+  .cabecera h2 { font-size: 33px; }
+  .cabecera > div::before { font-size: 9px; }
+  .panel-principal, .panel-secundario { padding: 16px; }
+  .acciones-grafica { grid-template-columns: 1fr; }
+  #limpiarGrafica { grid-column: auto; }
+  .datos-rapidos { display: block; }
+  .dato + .dato { border-left: 0; border-top: 1px solid #d7dfef; }
+  #funcion { font-size: 14px; }
+}
