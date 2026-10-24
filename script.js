@@ -176,7 +176,7 @@ function mostrarEstadoVacio() {
 
 
             <p>
-                Tu gráfica aparecerá aquí
+                Grafica
             </p>
 
             <small>
